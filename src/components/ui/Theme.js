@@ -34,7 +34,7 @@ export default createMuiTheme({
     body1: {
       fontFamily: "Raleway",
       fontSize: "1rem",
-      color: "white",
+      color: eGrey,
       fontWeight: 700,
     },
     body2: {

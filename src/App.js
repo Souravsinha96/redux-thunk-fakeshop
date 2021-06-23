@@ -5,6 +5,7 @@ import Products from "./components/Products";
 import theme from "./components/ui/Theme";
 import Header from "./components/ui/Header";
 import Footer from "./components/ui/Footer";
+import ProductDetail from "./components/ProductDetail";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route path="/" exact component={Products} />
+          <Route path="/" exact component={ProductDetail} />
         </Switch>
         <Footer />
       </BrowserRouter>
