@@ -13,7 +13,8 @@ function App() {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route path="/" exact component={ProductDetail} />
+          <Route path="/" exact component={Products} />
+          <Route path="/products/:id" exact component={ProductDetail} />
         </Switch>
         <Footer />
       </BrowserRouter>

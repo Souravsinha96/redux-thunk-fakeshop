@@ -33,7 +33,7 @@ export default createMuiTheme({
     },
     body1: {
       fontFamily: "Raleway",
-      fontSize: "1rem",
+      fontSize: "1.2rem",
       color: eGrey,
       fontWeight: 700,
     },
@@ -49,6 +49,21 @@ export default createMuiTheme({
     MuiCardMedia: {
       root: {
         backgroundSize: "contain",
+      },
+    },
+    MuiFormLabel: {
+      root: {
+        color: "#fff",
+      },
+    },
+    MuiSelect: {
+      icon: {
+        color: "#fff",
+      },
+      select: {
+        "&:focus": {
+          backgroundColor: "transparent",
+        },
       },
     },
   },

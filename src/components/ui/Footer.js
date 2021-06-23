@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { useTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/styles";
 import { useMediaQuery } from "@material-ui/core/useMediaQuery";
@@ -9,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.blue,
     position: "relative",
     zIndex: "1302",
-    marginTop: "6.1rem",
+    marginTop: "4.2rem",
   },
   footerContainer: {
     height: "3rem",
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1rem",
     fontWeight: "700",
     color: "white",
+    textDecoration: 0,
   },
 }));
 
@@ -33,7 +35,7 @@ function Footer() {
         alignItems="center"
         spacing={2}
       >
-        <Grid item className={classes.link}>
+        <Grid component={Link} to="/" item className={classes.link}>
           Home
         </Grid>
         <Grid item className={classes.link}>
@@ -44,6 +46,9 @@ function Footer() {
         </Grid>
         <Grid item className={classes.link}>
           Contact Us
+        </Grid>
+        <Grid item className={classes.link}>
+          Privacy Notice
         </Grid>
         <Grid item className={classes.link}>
           © 2007-2021 eshop.com

@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { getProducts } from "../redux/actions";
+import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import Divider from "@material-ui/core/Divider";
@@ -13,7 +15,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-import { getProducts } from "../redux/actions";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "80%",
@@ -25,9 +26,12 @@ const useStyles = makeStyles((theme) => ({
     margin: "1rem 0.3rem",
     maxWidth: "360px",
     height: "500px",
+    textDecoration: 0,
   },
   category: {
-    ...theme.typography.body1,
+    fontSize: "1rem",
+    textTransform: "uppercase",
+    fontWeight: 500,
     marginTop: "2rem",
   },
 }));
@@ -51,6 +55,8 @@ function Products() {
       {state !== undefined ? (
         state.map((product) => (
           <Grid
+            component={Link}
+            to={`/products/${product.id}`}
             key={product.id}
             item
             md={6}
