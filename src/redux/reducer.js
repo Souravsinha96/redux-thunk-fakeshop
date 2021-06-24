@@ -1,4 +1,10 @@
-import { GET_PRODUCTS, FETCH_PRODUCT, REMOVE_SELECTED } from "./actions";
+import {
+  GET_PRODUCTS,
+  FETCH_PRODUCT,
+  REMOVE_SELECTED,
+  SELECTED_CATEGORY,
+} from "./actions";
+import { cloneDeep } from "lodash";
 
 export const productsReducer = (state = [], action) => {
   switch (action.type) {

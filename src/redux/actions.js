@@ -2,11 +2,10 @@ import axios from "axios";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const FETCH_PRODUCT = "FETCH_PRODUCT";
 export const REMOVE_SELECTED = "REMOVE_SELECTED";
+export const SELECTED_CATEGORY = "SELECTED_CATEGORY";
 
 export const getProducts = () => async (dispatch) => {
-  const response = await axios.get(
-    "https://fakestoreapi.com/products?sort=desc"
-  );
+  const response = await axios.get("https://fakestoreapi.com/products");
 
   dispatch({
     type: GET_PRODUCTS,

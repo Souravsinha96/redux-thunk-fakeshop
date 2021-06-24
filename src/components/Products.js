@@ -15,6 +15,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "80%",
@@ -22,21 +25,36 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  mainContainer: {
+    maxWidth: "1600px",
+    margin: "0 auto",
+  },
   itemContainer: {
-    margin: "1rem 0.3rem",
+    margin: "1rem 0.5rem",
+    width: "360px",
     maxWidth: "360px",
     height: "500px",
     textDecoration: 0,
+    [theme.breakpoints.down("xs")]: {
+      width: "300px",
+      height: "450px",
+      marginTop: "1rem",
+    },
   },
   category: {
     fontSize: "1rem",
     textTransform: "uppercase",
     fontWeight: 500,
     marginTop: "2rem",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "1rem",
+    },
   },
 }));
 
 function Products() {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.allProducts[0]);
@@ -50,7 +68,6 @@ function Products() {
       direction="row"
       className={classes.mainContainer}
       justify="center"
-      spacing={2}
     >
       {state !== undefined ? (
         state.map((product) => (
@@ -59,20 +76,22 @@ function Products() {
             to={`/products/${product.id}`}
             key={product.id}
             item
-            md={6}
             lg={4}
             className={classes.itemContainer}
           >
             <Card raised>
               <CardActionArea
                 style={{
-                  height: "500px",
+                  height: matches ? "450px" : "500px",
                 }}
               >
                 <CardMedia
                   image={product.image}
                   title="Click for more info"
-                  style={{ height: "240px", margin: "10px" }}
+                  style={{
+                    height: matches ? "180px" : "240px",
+                    margin: "10px",
+                  }}
                 />
                 <Divider variant="middle" />
                 <CardContent>
