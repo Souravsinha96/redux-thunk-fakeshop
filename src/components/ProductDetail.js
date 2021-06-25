@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import { fetchProduct, removeSelectedProduct } from "../redux/actions";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -10,7 +12,7 @@ import Button from "@material-ui/core/Button";
 import Chip from "@material-ui/core/Chip";
 import Divider from "@material-ui/core/Divider";
 import { LinearProgress } from "@material-ui/core";
-import { fetchProduct, removeSelectedProduct } from "../redux/actions";
+import Hidden from "@material-ui/core/Hidden";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +49,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     fontSize: "1rem",
     textTransform: "none",
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "1rem",
+      fontSize: "1.2rem",
+    },
   },
 }));
 
@@ -60,9 +66,12 @@ function ProductDetail() {
     return () => {
       dispatch(removeSelectedProduct());
     };
-  }, [id]);
+  }, [id, dispatch]);
 
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const matches1 = useMediaQuery(theme.breakpoints.down("lg"));
 
   const oneProduct = useSelector((state) => state.oneProduct);
 
@@ -70,12 +79,14 @@ function ProductDetail() {
     <>
       {oneProduct.length !== 0 ? (
         oneProduct.map((item) => (
-          <Grid key={item.id} container direction="row" justify="center">
+          <Grid key={item.id} container justify="center">
             <Grid
+              item
               container
-              direction="row"
+              direction={matches ? "column" : "row"}
               justify="center"
-              style={{ margin: "3rem" }}
+              alignItems={matches && "center"}
+              style={{ marginTop: "3rem", marginLeft: matches ? 0 : "3rem" }}
             >
               <Grid item md={2}>
                 <Button
@@ -89,22 +100,33 @@ function ProductDetail() {
               </Grid>
               <Grid item md>
                 <img
-                  style={{ height: "450px", width: "450px" }}
+                  style={{
+                    height: matches ? "300px" : "450px",
+                    width: matches ? "300px" : "450px",
+                    marginBottom: matches ? "2rem" : 0,
+                  }}
                   src={item.image}
+                  alt=" item"
                 />
               </Grid>
-              <Divider
-                orientation="vertical"
-                flexItem
-                style={{ marginRight: "5rem" }}
-              />
+              <Hidden mdDown>
+                <Divider
+                  orientation="vertical"
+                  flexItem
+                  style={{ marginRight: "5rem" }}
+                />
+              </Hidden>
+
               <Grid item md>
                 <Grid item container direction="column" spacing={2}>
-                  <Grid item style={{ width: "500px" }}>
+                  <Grid
+                    item
+                    style={{ width: matches ? "350px" : "500px" }}
+                    align={matches ? "center" : "left"}
+                  >
                     <Typography
                       className={classes.title}
                       variant="h1"
-                      align="left"
                       paragraph
                     >
                       {item.title}
@@ -126,7 +148,7 @@ function ProductDetail() {
                       className={classes.chip}
                     />
                   </Grid>
-                  <Grid item>
+                  <Grid item align={matches ? "center" : "left"}>
                     <Button
                       disableRipple
                       className={classes.cart}

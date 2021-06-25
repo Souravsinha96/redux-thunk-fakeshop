@@ -60,7 +60,7 @@ function Products() {
   const state = useSelector((state) => state.allProducts[0]);
   useEffect(() => {
     dispatch(getProducts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Grid

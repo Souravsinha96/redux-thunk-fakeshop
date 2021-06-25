@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.blue,
     position: "relative",
     zIndex: "1302",
-    marginTop: "3.7rem",
+    marginTop: "7rem",
     width: "100vw",
   },
   footerContainer: {
